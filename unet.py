@@ -13,4 +13,6 @@ IMG_chanel = 3
 #build the chanel
 
 #input layer
-input = tf.keras.layers.Input((IMG_width, IMG_height, IMG_chanel))
+inputs = tf.keras.layers.Input((IMG_width, IMG_height, IMG_chanel))
+
+c1 = tf.keras.layers.Conv2D(16, (3,3), activation='relu', kernel_initializer='he_normal', padding='same')(inputs)
