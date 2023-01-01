@@ -19,4 +19,7 @@ s= tf.keras.layers.Lambda(lambda x:x/255)(inputs)#convert integer rgb values int
 
 c1 = tf.keras.layers.Conv2D(16, (3,3), activation='relu', kernel_initializer='he_normal', padding='same')(s)
 c1 = tf.keras.layers.Dropout(0.1)(c1)#drop out to generalize
+c1 = tf.keras.layers.Conv2D(16, (3,3), activation='relu', kernel_initializer='he_normal', padding='same')(c1)
+p1 = tf.keras.layers.MaxPool2D((2,2))(c1)
+
 
