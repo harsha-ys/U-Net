@@ -72,6 +72,10 @@ c9 = tf.keras.layers.Conv2D(16, (3,3), activation='relu', kernel_initializer='he
 
 outputs = tf.keras.layers.Conv2D(1, (1,1), activation='sigmoid')(c9) 
 
+model= tf.keras.Model(inputs=[inputs], outputs=[outputs])
+model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+model.summary()
+
 
 
 
