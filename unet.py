@@ -77,8 +77,16 @@ model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy']
 model.summary()
 
 
+#modelcheckpoint
+checkpoint =  tf.keras.callbacks.ModelCheckpoint('UNET_model.h5', monitor='val_loss', verbose=1)
+
+callbacks = [
+                tf.keras.callbacks.EarlyStopping(monitor='var_loss', patience=2)
+                tf.keras.callbacks.TensorBoard(log_dir='logs')
+            ] 
 
 
+results = model.fit(X, Y, batch_size=16, validation_split=0.1, epochs= 25, callbacks=callbacks)
 
 #Expansive path (Decoder path)
 
