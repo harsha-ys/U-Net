@@ -81,7 +81,7 @@ model.summary()
 checkpoint =  tf.keras.callbacks.ModelCheckpoint('UNET_model.h5', monitor='val_loss', verbose=1)
 
 callbacks = [
-                tf.keras.callbacks.EarlyStopping(monitor='var_loss', patience=2)
+                tf.keras.callbacks.EarlyStopping(monitor='var_loss', patience=2),
                 tf.keras.callbacks.TensorBoard(log_dir='logs')
             ] 
 
