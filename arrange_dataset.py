@@ -14,6 +14,10 @@ import numpy as np
 #mport matplotlib.image as mpimg
 from numpy import asarray
 
+name = 5
+X = np.zeros((593, 256, 256, 3), dtype=np.uint8)
+Y = np.zeros((593, 256, 256), dtype=np.bool)
+
 class arrange_datase:
     
     def __init__(self, rootPathForImages = None, rootPathForMasks = None, imageType=None):
@@ -56,7 +60,10 @@ class arrange_datase:
                     p=rootPath+"\image"+str(i)+"\mask\\" + test
                     p.encode('unicode_escape')
                     raw_s = r'{}'.format(p)
-                    self.createMask(p)
+                    image1 = cv2.imread(image)
+                    image2 = cv2.resize( image1, ( 256, 256 ))
+                    X[i-1] = image2
+                    self.createMask(p, i)
                     
                     #self.imageSet.remove(image)
                     self.maskSet.remove(mask)
@@ -64,7 +71,7 @@ class arrange_datase:
                     i=i+1
                     break
     
-    def createMask(self, imagePath):
+    def createMask(self, imagePath, i):
         
         image = cv2.imread(imagePath)
         
@@ -73,6 +80,8 @@ class arrange_datase:
         L_B = np.array([0, 0, 0])
         U_B = np.array([254, 254, 254])
         mask = cv2.inRange(image, L_B, U_B)
+        mask2 = cv2.resize( mask, ( 256, 256 ))
+        Y[i-1] = mask2
         #cv2.imshow("test", mask)
         
         #cv2.waitKey(0)
@@ -80,18 +89,25 @@ class arrange_datase:
         extension = os.path.splitext(os.path.basename(imagePath))[1]
         p = dirName+"\\"+"bw" + extension
         cv2.imwrite(p, mask)
-        
+    
+
+def cd():
+    
+    object1 =  arrange_datase('D:\maskimages\input', 'D:\maskimages\output', 'jpg')
+    #arrange_datase.createMask("D:\maskimages\images\image1\image\A10_20221130_114159.jpg")
+    
+    object1.createTheDataset('D:\maskimages\images')       
         
 
         
         
-if __name__ == "__main__":
+"""if __name__ == "__main__":
     
     object1 =  arrange_datase('D:\maskimages\input', 'D:\maskimages\output', 'jpg')
     #arrange_datase.createMask("D:\maskimages\images\image1\image\A10_20221130_114159.jpg")
     print("v")
     
-    object1.createTheDataset('D:\maskimages\images')
+    object1.createTheDataset('D:\maskimages\images')"""
     
 
     
