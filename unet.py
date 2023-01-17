@@ -22,12 +22,6 @@ import random
 #from skimage.transform import resize
 #import matplotlib.pyplot as plt
 
-print("hari")
-a.cd()
-print("a")
-X_train = a.X
-Y_train = a.Y
-
 #build the chanel
 
 #input layer
